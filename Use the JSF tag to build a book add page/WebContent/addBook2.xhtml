@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>添加图书</title>
+</h:head>
+<h:body>
+	<h:form id = "addbook">
+		<h:panelGrid columns="3">
+		
+		<h:outputLabel value="图书名称"></h:outputLabel>
+		<h:inputText id = "bookname" value = "#{book.bookname}" required="true"  label = "书名"></h:inputText>
+		<h:message for="bookname"></h:message>
+		
+		<h:outputLabel value="图书书号"></h:outputLabel>
+		<h:inputText id = "booknum" value = "#{book.booknum}" required="true"  label = "书号"></h:inputText>
+		<h:message for="booknum"></h:message>
+		
+		<h:outputLabel value="图书作者"></h:outputLabel>
+		<h:inputText id = "bookwriter" value = "#{book.bookwriter}" required="true"  label = "作者">
+			<f:converter converterId = "bookWriterConverter"> </f:converter>
+		</h:inputText>
+		<h:message for="bookwriter"></h:message>
+		
+		<h:outputLabel value="出版时间"></h:outputLabel>
+		<h:inputText id = "publishtime" value = "#{book.publishtime}" required="true"  label = "出版时间">
+			<f:convertDateTime pattern="MM/yyyy"/>
+		</h:inputText>
+		<h:message for="publishtime"></h:message>
+		
+		<h:outputLabel value="图书价格"></h:outputLabel>
+		<h:inputText id = "price" value = "#{book.bookprice}" required="true"  label = "价格">
+			
+		</h:inputText>
+		<h:message for="price"></h:message>	
+		
+		<h:outputLabel value="图书类别"></h:outputLabel>
+		<h:selectOneListbox id="booktype" value = "0" size = "1" label = "类别"
+
+		                    onchange="submit()" 
+		                    immediate="true">
+			<f:selectItem itemValue = "0" itemLabel = "计算机"></f:selectItem>
+			<f:selectItem itemValue = "1" itemLabel = "管理"></f:selectItem>
+			<f:selectItem itemValue = "2" itemLabel = "文学"></f:selectItem>
+			<f:selectItem itemValue = "3" itemLabel = "其它"></f:selectItem>						
+		</h:selectOneListbox>
+
+		<h:message for="booktype"></h:message>	
+		
+		<h:outputLabel value="图书子类别"></h:outputLabel>
+		<h:selectOneListbox id="booksubtype" value = "0" size = "1" label = "子类">
+		<c:choose>
+			<c:when test="#{book.booktype == 0}">
+				<f:selectItem itemValue = "0" itemLabel = "软件工程"></f:selectItem>
+				<f:selectItem itemValue = "1" itemLabel = "算法分析"></f:selectItem>
+				<f:selectItem itemValue = "2" itemLabel = "编程语言"></f:selectItem>
+				<f:selectItem itemValue = "3" itemLabel = "其它"></f:selectItem>		
+			</c:when>
+			
+			<c:otherwise>
+				<f:selectItem itemValue = "0" itemLabel = "其它"></f:selectItem>					
+			</c:otherwise>
+		</c:choose>			
+		</h:selectOneListbox>
+		<h:message for="booksubtype"></h:message>						
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
